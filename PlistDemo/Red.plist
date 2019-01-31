@@ -2,23 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Colors</key>
+	<dict>
+		<key>red</key>
+		<string>#EB4F38  Red</string>
+	</dict>
 	<key>UIStatusBarStyle</key>
 	<string>LightContent</string>
 	<key>Global</key>
 	<dict>
 		<key>backgroundColor</key>
-		<string>#FFF</string>
+		<string>#FFF Black</string>
 		<key>textColor</key>
-		<string>#000</string>
+		<string>#000 White</string>
 		<key>barTextColor</key>
-		<string>#FFF</string>
+		<string>#FFF Black</string>
 		<key>barTintColor</key>
-		<string>#EB4F38</string>
+		<string>$Colors.red</string>
 	</dict>
 	<key>ListViewController</key>
 	<dict>
 		<key>separatorColor</key>
-		<string>#C6C5C5</string>
+		<string>#C6C5C5 Light Grey</string>
 	</dict>
 	<key>SelectThemeCell</key>
 	<dict>
@@ -33,11 +38,11 @@
 	<key>ChangeThemeCell</key>
 	<dict>
 		<key>buttonTitleColorNormal</key>
-		<string>#FFF</string>
+		<string>#FFF Black</string>
 		<key>buttonTitleColorHighlighted</key>
-		<string>#555</string>
+		<string>#555 Dark Grey</string>
 		<key>buttonBackgroundColor</key>
-		<string>#EB4F38</string>
+		<string>$Colors.red</string>
 	</dict>
 </dict>
 </plist>

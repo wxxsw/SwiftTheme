@@ -10,12 +10,22 @@ import UIKit
 
 @objc extension ThemeManager {
     
-    public class func value(for keyPath: String) -> Any? {
-        return currentTheme?.value(forKeyPath: keyPath)
+    public class func value(for keyPath: String, depth: Int = 1) -> Any? {
+        guard depth < 10 else {
+            print("SwiftTheme WARNING: Possible recursive reference for: \(keyPath)")
+            return nil
+        }
+        let firstFound = currentTheme?.value(forKeyPath: keyPath)
+        if let firstFoundString = firstFound as? String {
+            if firstFoundString.hasPrefix("$") {
+                return value(for: String(firstFoundString.dropFirst()), depth: (depth + 1))
+            }
+        }
+        return firstFound
     }
     
     public class func string(for keyPath: String) -> String? {
-        guard let string = currentTheme?.value(forKeyPath: keyPath) as? String else {
+        guard let string = ThemeManager.value(for: keyPath) as? String else {
             print("SwiftTheme WARNING: Not found string key path: \(keyPath)")
             return nil
         }
@@ -23,7 +33,7 @@ import UIKit
     }
     
     public class func number(for keyPath: String) -> NSNumber? {
-        guard let number = currentTheme?.value(forKeyPath: keyPath) as? NSNumber else {
+        guard let number = ThemeManager.value(for: keyPath) as? NSNumber else {
             print("SwiftTheme WARNING: Not found number key path: \(keyPath)")
             return nil
         }
@@ -31,7 +41,7 @@ import UIKit
     }
     
     public class func dictionary(for keyPath: String) -> NSDictionary? {
-        guard let dict = currentTheme?.value(forKeyPath: keyPath) as? NSDictionary else {
+        guard let dict = ThemeManager.value(for: keyPath) as? NSDictionary else {
             print("SwiftTheme WARNING: Not found dictionary key path: \(keyPath)")
             return nil
         }
