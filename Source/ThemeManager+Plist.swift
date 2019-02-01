@@ -49,9 +49,15 @@ import UIKit
     }
     
     public class func color(for keyPath: String) -> UIColor? {
-        guard let rgba = string(for: keyPath) else { return nil }
-        guard let color = try? UIColor(rgba_throws: rgba) else {
-            print("SwiftTheme WARNING: Not convert rgba \(rgba) at key path: \(keyPath)")
+        var rgba: String?
+        if keyPath.hasPrefix("#") {
+            rgba = keyPath
+        } else {
+            rgba = string(for: keyPath)
+        }
+        guard rgba != nil else {return nil}
+        guard let color = try? UIColor(rgba_throws: rgba!) else {
+            print("SwiftTheme WARNING: Not convert rgba \(rgba!) at key path: \(keyPath)")
             return nil
         }
         return color
