@@ -33,6 +33,7 @@ import UIKit
     }
     
     public class func number(for keyPath: String) -> NSNumber? {
+        
         guard let number = ThemeManager.value(for: keyPath) as? NSNumber else {
             print("SwiftTheme WARNING: Not found number key path: \(keyPath)")
             return nil
@@ -67,7 +68,7 @@ import UIKit
         guard let imageName = string(for: keyPath) else { return nil }
         if let filePath = currentThemePath?.URL?.appendingPathComponent(imageName).path {
             guard let image = UIImage(contentsOfFile: filePath) else {
-                print("SwiftTheme WARNING: Not found image at file path: \(filePath)")
+                print("SwiftTheme WARNING: Not found image at key path: \(keyPath)")
                 return nil
             }
             return image
@@ -78,6 +79,52 @@ import UIKit
             }
             return image
         }
+    }
+    
+    public class func textAttributes(for keyPath: String) -> [NSAttributedString.Key : AnyObject]? {
+        guard let rawAttributes = dictionary(for: keyPath) else {
+            print("SwiftTheme WARNING: Did not find attributes dictionary at key path: \(keyPath)")
+            return nil
+        }
+        var titleTextAttributes = [NSAttributedString.Key : AnyObject]()
+        for (key, value) in rawAttributes {
+            if let keyString = key as? String {
+                switch keyString {
+                case "foregroundColor":
+                    if let colorString = value as? String {
+                        if let color = color(for: colorString) {
+                            titleTextAttributes[NSAttributedString.Key.foregroundColor] = color
+                        }
+                    } else {
+                        print("SwiftTheme WARNING: Could not decode foreground color from keyPath: \(keyPath)")
+                    }
+                case "backgroundColor":
+                    if let colorString = value as? String {
+                        if let color = color(for: colorString) {
+                            titleTextAttributes[NSAttributedString.Key.backgroundColor] = color
+                        }
+                    } else {
+                        print("SwiftTheme WARNING: Could not decode background color from keyPath: \(keyPath))")
+                    }
+              case "fontSize":
+                    var fontSize: NSNumber?
+                    if let directSize = value as? NSNumber {
+                        fontSize = directSize
+                    }
+                    if let fontString = value as? String {
+                        fontSize = ThemeManager.number(for: fontString)
+                    }
+                    if fontSize == nil {
+                        print("SwiftTheme WARNING: Unable to detect font size from keyPath: \(keyPath))")
+                    } else {
+                        titleTextAttributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: CGFloat.init(truncating: fontSize!))
+                    }
+                default:
+                    print("SwiftTheme WARNING: unrecognized text attribute key: \(key) at keyPath: \(keyPath)")
+                }
+            }
+        }
+         return titleTextAttributes
     }
     
 }
