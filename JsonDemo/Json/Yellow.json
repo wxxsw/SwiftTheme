@@ -11,7 +11,7 @@
     "buttonBackgroundColor": "#F4C600"
   },
   "SelectThemeCell": {
-    "iconImage": "icon_theme_yellow"
+    "iconImage": "icon_theme.yellow"
   },
   "UIStatusBarStyle": "DarkContent",
   "Global": {

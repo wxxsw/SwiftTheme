@@ -15,9 +15,9 @@ class ChangeThemeCell: BaseCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        changeTheme.theme_setTitleColor("ChangeThemeCell.buttonTitleColorNormal", forState: .normal)
-        changeTheme.theme_setTitleColor("ChangeThemeCell.buttonTitleColorNormal", forState: .highlighted)
-        changeTheme.theme_backgroundColor = "ChangeThemeCell.buttonBackgroundColor"
+        changeTheme.theme.setTitleColor("ChangeThemeCell.buttonTitleColorNormal", forState: .normal)
+        changeTheme.theme.setTitleColor("ChangeThemeCell.buttonTitleColorNormal", forState: .highlighted)
+        changeTheme.theme.backgroundColor = "ChangeThemeCell.buttonBackgroundColor"
         changeTheme.layer.cornerRadius = changeTheme.bounds.size.width / 2
     }
     

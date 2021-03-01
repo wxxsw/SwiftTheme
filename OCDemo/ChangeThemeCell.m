@@ -15,9 +15,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.changeTheme theme_setTitleColor:[ThemeColorPicker pickerWithColors:@[@"#FFF", @"#000", @"#FFF", @"#000"]] forState:UIControlStateNormal];
-    [self.changeTheme theme_setTitleColor:[ThemeColorPicker pickerWithColors:@[@"#555", @"#AAA", @"#555", @"#AAA"]] forState:UIControlStateHighlighted];
-    self.changeTheme.theme_backgroundColor = [ThemeColorPicker pickerWithColors:@[@"#EB4F38", @"#F4C600", @"#56ABE4", @"#ECF0F1"]];
+    [self.changeTheme theme.setTitleColor:[ThemeColorPicker pickerWithColors:@[@"#FFF", @"#000", @"#FFF", @"#000"]] forState:UIControlStateNormal];
+    [self.changeTheme theme.setTitleColor:[ThemeColorPicker pickerWithColors:@[@"#555", @"#AAA", @"#555", @"#AAA"]] forState:UIControlStateHighlighted];
+    self.changeTheme.theme.backgroundColor = [ThemeColorPicker pickerWithColors:@[@"#EB4F38", @"#F4C600", @"#56ABE4", @"#ECF0F1"]];
     self.changeTheme.layer.cornerRadius = self.changeTheme.bounds.size.width / 2;
 }
 
