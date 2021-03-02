@@ -16,8 +16,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.title.theme_textColor = globalTextColorPicker;
-    self.nightIcon.theme_image = [ThemeImagePicker pickerWithNames:@[@"icon_night_dark", @"icon_night_dark", @"icon_night_dark", @"icon_night_light"]];
+    self.title.theme.textColor = globalTextColorPicker;
+    self.nightIcon.theme.image = [ThemeImagePicker pickerWithNames:@[@"icon_night_dark", @"icon_night_dark", @"icon_night_dark", @"icon_night_light"]];
     
     [self updateNightSwitch];
     

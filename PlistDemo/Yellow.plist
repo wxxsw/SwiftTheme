@@ -23,7 +23,7 @@
 	<key>SelectThemeCell</key>
 	<dict>
 		<key>iconImage</key>
-		<string>icon_theme_yellow</string>
+		<string>icon_theme.yellow</string>
 	</dict>
 	<key>SwitchNightCell</key>
 	<dict>

@@ -8,417 +8,414 @@
 
 import UIKit
 
-@objc public extension UIView
-{
-    var theme_alpha: ThemeCGFloatPicker? {
-        get { return getThemePicker(self, "setAlpha:") as? ThemeCGFloatPicker }
-        set { setThemePicker(self, "setAlpha:", newValue) }
-    }
-    var theme_backgroundColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBackgroundColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBackgroundColor:", newValue) }
-    }
-    var theme_tintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setTintColor:", newValue) }
+public class XTTheme<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
     }
 }
-@objc public extension UIApplication
-{
+
+public protocol ThemeCompatible {
+    associatedtype ThemeBase
+    var theme: XTTheme<ThemeBase> {get set}
+}
+
+extension ThemeCompatible {
+    public var theme: XTTheme<Self> {
+        get {XTTheme(self)}
+        set {}
+    }
+}
+
+extension NSObject: ThemeCompatible {}
+
+extension XTTheme where Base: UIView {
+    public var alpha: ThemeCGFloatPicker? {
+        get { return getThemePicker(base, "setAlpha:") as? ThemeCGFloatPicker }
+         set { setThemePicker(base, "setAlpha:", newValue) }
+    }
+    
+    public var backgroundColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBackgroundColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBackgroundColor:", newValue) }
+    }
+    
+    public func setBackgroundColor(_ color: ThemeColorPicker?) {
+        setThemePicker(base, "setBackgroundColor:", color)
+    }
+    public var tintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setTintColor:", newValue) }
+    }
+}
+
+extension XTTheme where Base: UIApplication {
     #if os(iOS)
-    func theme_setStatusBarStyle(_ picker: ThemeStatusBarStylePicker, animated: Bool) {
+    public func setStatusBarStyle(_ picker: ThemeStatusBarStylePicker, animated: Bool) {
         picker.animated = animated
-        setThemePicker(self, "setStatusBarStyle:animated:", picker)
+        setThemePicker(base, "setStatusBarStyle:animated:", picker)
     }
     #endif
 }
-@objc public extension UIBarItem
-{
-    var theme_image: ThemeImagePicker? {
-        get { return getThemePicker(self, "setImage:") as? ThemeImagePicker }
-        set { setThemePicker(self, "setImage:", newValue) }
+extension XTTheme where Base: UIBarItem {
+    public var image: ThemeImagePicker? {
+        get { return getThemePicker(base, "setImage:") as? ThemeImagePicker }
+        set { setThemePicker(base, "setImage:", newValue) }
     }
-    func theme_setTitleTextAttributes(_ picker: ThemeStringAttributesPicker?, forState state: UIControl.State) {
-        let statePicker = makeStatePicker(self, "setTitleTextAttributes:forState:", picker, state)
-        setThemePicker(self, "setTitleTextAttributes:forState:", statePicker)
-    }
-}
-@objc public extension UIBarButtonItem
-{
-    var theme_tintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setTintColor:", newValue) }
+    public func setTitleTextAttributes(_ picker: ThemeStringAttributesPicker?, forState state: UIControl.State) {
+        let statePicker = makeStatePicker(base, "setTitleTextAttributes:forState:", picker, state)
+        setThemePicker(base, "setTitleTextAttributes:forState:", statePicker)
     }
 }
-@objc public extension UILabel
-{
-    var theme_font: ThemeFontPicker? {
-        get { return getThemePicker(self, "setFont:") as? ThemeFontPicker }
-        set { setThemePicker(self, "setFont:", newValue) }
-    }
-    var theme_textColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setTextColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setTextColor:", newValue) }
-    }
-    var theme_highlightedTextColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setHighlightedTextColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setHighlightedTextColor:", newValue) }
-    }
-    var theme_shadowColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setShadowColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setShadowColor:", newValue) }
-    }
-    var theme_textAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "updateTextAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "updateTextAttributes:", newValue) }
-    }
-    var theme_attributedText: ThemeAttributedStringPicker? {
-        get { return getThemePicker(self, "setAttributedText:") as? ThemeAttributedStringPicker }
-        set { setThemePicker(self, "setAttributedText:", newValue) }
+extension XTTheme where Base: UIBarButtonItem {
+    public var tintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setTintColor:", newValue) }
     }
 }
-@objc public extension UINavigationBar
-{
+extension XTTheme where Base: UILabel {
+    public var font: ThemeFontPicker? {
+        get { return getThemePicker(base, "setFont:") as? ThemeFontPicker }
+        set { setThemePicker(base, "setFont:", newValue) }
+    }
+    public var textColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setTextColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setTextColor:", newValue) }
+    }
+    public var highlightedTextColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setHighlightedTextColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setHighlightedTextColor:", newValue) }
+    }
+    public var shadowColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setShadowColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setShadowColor:", newValue) }
+    }
+    public var textAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "updateTextAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "updateTextAttributes:", newValue) }
+    }
+    public var attributedText: ThemeAttributedStringPicker? {
+        get { return getThemePicker(base, "setAttributedText:") as? ThemeAttributedStringPicker }
+        set { setThemePicker(base, "setAttributedText:", newValue) }
+    }
+}
+extension XTTheme where Base: UINavigationBar {
     #if os(iOS)
-    var theme_barStyle: ThemeBarStylePicker? {
-        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
-        set { setThemePicker(self, "setBarStyle:", newValue) }
+    public var barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(base, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(base, "setBarStyle:", newValue) }
     }
     #endif
-    var theme_barTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBarTintColor:", newValue) }
+    public var barTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBarTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBarTintColor:", newValue) }
     }
-    var theme_titleTextAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "setTitleTextAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "setTitleTextAttributes:", newValue) }
+    public var titleTextAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "setTitleTextAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "setTitleTextAttributes:", newValue) }
     }
-    var theme_largeTitleTextAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "setLargeTitleTextAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "setLargeTitleTextAttributes:", newValue) }
+    public var largeTitleTextAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "setLargeTitleTextAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "setLargeTitleTextAttributes:", newValue) }
     }
     @available(iOS 13.0, tvOS 13.0, *)
-    var theme_standardAppearance: ThemeNavigationBarAppearancePicker? {
-        get { return getThemePicker(self, "setStandardAppearance:") as? ThemeNavigationBarAppearancePicker }
-        set { setThemePicker(self, "setStandardAppearance:", newValue) }
+    public var standardAppearance: ThemeNavigationBarAppearancePicker? {
+        get { return getThemePicker(base, "setStandardAppearance:") as? ThemeNavigationBarAppearancePicker }
+        set { setThemePicker(base, "setStandardAppearance:", newValue) }
     }
     @available(iOS 13.0, tvOS 13.0, *)
-    var theme_compactAppearance: ThemeNavigationBarAppearancePicker? {
-        get { return getThemePicker(self, "setCompactAppearance:") as? ThemeNavigationBarAppearancePicker }
-        set { setThemePicker(self, "setCompactAppearance:", newValue) }
+    public var compactAppearance: ThemeNavigationBarAppearancePicker? {
+        get { return getThemePicker(base, "setCompactAppearance:") as? ThemeNavigationBarAppearancePicker }
+        set { setThemePicker(base, "setCompactAppearance:", newValue) }
     }
     @available(iOS 13.0, tvOS 13.0, *)
-    var theme_scrollEdgeAppearance: ThemeNavigationBarAppearancePicker? {
-        get { return getThemePicker(self, "setScrollEdgeAppearance:") as? ThemeNavigationBarAppearancePicker }
-        set { setThemePicker(self, "setScrollEdgeAppearance:", newValue) }
+    public var scrollEdgeAppearance: ThemeNavigationBarAppearancePicker? {
+        get { return getThemePicker(base, "setScrollEdgeAppearance:") as? ThemeNavigationBarAppearancePicker }
+        set { setThemePicker(base, "setScrollEdgeAppearance:", newValue) }
     }
 }
-@objc public extension UITabBar
-{
+extension XTTheme where Base: UITabBar {
     #if os(iOS)
-    var theme_barStyle: ThemeBarStylePicker? {
-        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
-        set { setThemePicker(self, "setBarStyle:", newValue) }
+    public var barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(base, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(base, "setBarStyle:", newValue) }
     }
     #endif
-    var theme_unselectedItemTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setUnselectedItemTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setUnselectedItemTintColor:", newValue) }
+    public var unselectedItemTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setUnselectedItemTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setUnselectedItemTintColor:", newValue) }
     }
-    var theme_barTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBarTintColor:", newValue) }
-    }
-}
-@objc public extension UITabBarItem
-{
-    var theme_selectedImage: ThemeImagePicker? {
-        get { return getThemePicker(self, "setSelectedImage:") as? ThemeImagePicker }
-        set { setThemePicker(self, "setSelectedImage:", newValue) }
+    public var barTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBarTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBarTintColor:", newValue) }
     }
 }
-@objc public extension UITableView
-{
-    var theme_separatorColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setSeparatorColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setSeparatorColor:", newValue) }
-    }
-    var theme_sectionIndexColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setSectionIndexColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setSectionIndexColor:", newValue) }
-    }
-    var theme_sectionIndexBackgroundColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setSectionIndexBackgroundColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setSectionIndexBackgroundColor:", newValue) }
+extension XTTheme where Base: UITabBarItem {
+    public var selectedImage: ThemeImagePicker? {
+        get { return getThemePicker(base, "setSelectedImage:") as? ThemeImagePicker }
+        set { setThemePicker(base, "setSelectedImage:", newValue) }
     }
 }
-@objc public extension UITextField
-{
-    var theme_font: ThemeFontPicker? {
-        get { return getThemePicker(self, "setFont:") as? ThemeFontPicker }
-        set { setThemePicker(self, "setFont:", newValue) }
+extension XTTheme where Base: UITableView {
+    public var separatorColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setSeparatorColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setSeparatorColor:", newValue) }
     }
-    var theme_keyboardAppearance: ThemeKeyboardAppearancePicker? {
-        get { return getThemePicker(self, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
-        set { setThemePicker(self, "setKeyboardAppearance:", newValue) }
+    public var sectionIndexColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setSectionIndexColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setSectionIndexColor:", newValue) }
     }
-    var theme_textColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setTextColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setTextColor:", newValue) }
-    }
-    var theme_placeholderAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "updatePlaceholderAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "updatePlaceholderAttributes:", newValue) }
+    public var sectionIndexBackgroundColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setSectionIndexBackgroundColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setSectionIndexBackgroundColor:", newValue) }
     }
 }
-@objc public extension UITextView
-{
-    var theme_font: ThemeFontPicker? {
-        get { return getThemePicker(self, "setFont:") as? ThemeFontPicker }
-        set { setThemePicker(self, "setFont:", newValue) }
+extension XTTheme where Base: UITextField {
+    public var font: ThemeFontPicker? {
+        get { return getThemePicker(base, "setFont:") as? ThemeFontPicker }
+        set { setThemePicker(base, "setFont:", newValue) }
     }
-    var theme_keyboardAppearance: ThemeKeyboardAppearancePicker? {
-        get { return getThemePicker(self, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
-        set { setThemePicker(self, "setKeyboardAppearance:", newValue) }
+    public var keyboardAppearance: ThemeKeyboardAppearancePicker? {
+        get { return getThemePicker(base, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
+        set { setThemePicker(base, "setKeyboardAppearance:", newValue) }
     }
-    var theme_textColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setTextColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setTextColor:", newValue) }
+    public var textColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setTextColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setTextColor:", newValue) }
+    }
+    public var placeholderAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "updatePlaceholderAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "updatePlaceholderAttributes:", newValue) }
     }
 }
-@objc public extension UISearchBar
-{
+extension XTTheme where Base: UITextView {
+    public var font: ThemeFontPicker? {
+        get { return getThemePicker(base, "setFont:") as? ThemeFontPicker }
+        set { setThemePicker(base, "setFont:", newValue) }
+    }
+    public var keyboardAppearance: ThemeKeyboardAppearancePicker? {
+        get { return getThemePicker(base, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
+        set { setThemePicker(base, "setKeyboardAppearance:", newValue) }
+    }
+    public var textColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setTextColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setTextColor:", newValue) }
+    }
+}
+extension XTTheme where Base: UISearchBar {
     #if os(iOS)
-    var theme_barStyle: ThemeBarStylePicker? {
-        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
-        set { setThemePicker(self, "setBarStyle:", newValue) }
+    public var barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(base, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(base, "setBarStyle:", newValue) }
     }
     #endif
-    var theme_keyboardAppearance: ThemeKeyboardAppearancePicker? {
-        get { return getThemePicker(self, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
-        set { setThemePicker(self, "setKeyboardAppearance:", newValue) }
+    public var keyboardAppearance: ThemeKeyboardAppearancePicker? {
+        get { return getThemePicker(base, "setKeyboardAppearance:") as? ThemeKeyboardAppearancePicker }
+        set { setThemePicker(base, "setKeyboardAppearance:", newValue) }
     }
-    var theme_barTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBarTintColor:", newValue) }
-    }
-}
-@objc public extension UIProgressView
-{
-    var theme_progressTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setProgressTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setProgressTintColor:", newValue) }
-    }
-    var theme_trackTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setTrackTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setTrackTintColor:", newValue) }
+    public var barTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBarTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBarTintColor:", newValue) }
     }
 }
-@objc public extension UIPageControl
-{
-    var theme_pageIndicatorTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setPageIndicatorTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setPageIndicatorTintColor:", newValue) }
+extension XTTheme where Base: UIProgressView {
+    public var progressTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setProgressTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setProgressTintColor:", newValue) }
     }
-    var theme_currentPageIndicatorTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setCurrentPageIndicatorTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setCurrentPageIndicatorTintColor:", newValue) }
-    }
-}
-@objc public extension UIImageView
-{
-    var theme_image: ThemeImagePicker? {
-        get { return getThemePicker(self, "setImage:") as? ThemeImagePicker }
-        set { setThemePicker(self, "setImage:", newValue) }
+    public var trackTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setTrackTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setTrackTintColor:", newValue) }
     }
 }
-@objc public extension UIActivityIndicatorView
-{
-    var theme_color: ThemeColorPicker? {
-        get { return getThemePicker(self, "setColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setColor:", newValue) }
+extension XTTheme where Base: UIPageControl {
+    public var pageIndicatorTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setPageIndicatorTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setPageIndicatorTintColor:", newValue) }
     }
-    var theme_activityIndicatorViewStyle: ThemeActivityIndicatorViewStylePicker? {
-        get { return getThemePicker(self, "setActivityIndicatorViewStyle:") as? ThemeActivityIndicatorViewStylePicker }
-        set { setThemePicker(self, "setActivityIndicatorViewStyle:", newValue) }
-    }
-}
-@objc public extension UIScrollView
-{
-    var theme_indicatorStyle: ThemeScrollViewIndicatorStylePicker? {
-        get { return getThemePicker(self, "setIndicatorStyle:") as? ThemeScrollViewIndicatorStylePicker }
-        set { setThemePicker(self, "setIndicatorStyle:", newValue) }
+    public var currentPageIndicatorTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setCurrentPageIndicatorTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setCurrentPageIndicatorTintColor:", newValue) }
     }
 }
-@objc public extension UIButton
-{
-    func theme_setImage(_ picker: ThemeImagePicker?, forState state: UIControl.State) {
-        let statePicker = makeStatePicker(self, "setImage:forState:", picker, state)
-        setThemePicker(self, "setImage:forState:", statePicker)
-    }
-    func theme_setBackgroundImage(_ picker: ThemeImagePicker?, forState state: UIControl.State) {
-        let statePicker = makeStatePicker(self, "setBackgroundImage:forState:", picker, state)
-        setThemePicker(self, "setBackgroundImage:forState:", statePicker)
-    }
-    func theme_setTitleColor(_ picker: ThemeColorPicker?, forState state: UIControl.State) {
-        let statePicker = makeStatePicker(self, "setTitleColor:forState:", picker, state)
-        setThemePicker(self, "setTitleColor:forState:", statePicker)
-    }
-    func theme_setAttributedTitle(_ picker: ThemeAttributedStringPicker?, forState state: UIControl.State) {
-        let statePicker = makeStatePicker(self, "setAttributedTitle:forState:", picker, state)
-        setThemePicker(self, "setAttributedTitle:forState:", statePicker)
+extension XTTheme where Base: UIImageView {
+    public var image: ThemeImagePicker? {
+        get { return getThemePicker(base, "setImage:") as? ThemeImagePicker }
+        set { setThemePicker(base, "setImage:", newValue) }
     }
 }
-@objc public extension CALayer
-{
-    var theme_backgroundColor: ThemeCGColorPicker? {
-        get { return getThemePicker(self, "setBackgroundColor:") as? ThemeCGColorPicker}
-        set { setThemePicker(self, "setBackgroundColor:", newValue) }
+extension XTTheme where Base: UIActivityIndicatorView {
+    public var color: ThemeColorPicker? {
+        get { return getThemePicker(base, "setColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setColor:", newValue) }
     }
-    var theme_borderWidth: ThemeCGFloatPicker? {
-        get { return getThemePicker(self, "setBorderWidth:") as? ThemeCGFloatPicker }
-        set { setThemePicker(self, "setBorderWidth:", newValue) }
-    }
-    var theme_borderColor: ThemeCGColorPicker? {
-        get { return getThemePicker(self, "setBorderColor:") as? ThemeCGColorPicker }
-        set { setThemePicker(self, "setBorderColor:", newValue) }
-    }
-    var theme_shadowColor: ThemeCGColorPicker? {
-        get { return getThemePicker(self, "setShadowColor:") as? ThemeCGColorPicker }
-        set { setThemePicker(self, "setShadowColor:", newValue) }
-    }
-    var theme_strokeColor: ThemeCGColorPicker? {
-        get { return getThemePicker(self, "setStrokeColor:") as? ThemeCGColorPicker }
-        set { setThemePicker(self, "setStrokeColor:", newValue) }
-    }
-    var theme_fillColor: ThemeCGColorPicker?{
-        get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
-        set { setThemePicker(self, "setFillColor:", newValue) }
+    public var activityIndicatorViewStyle: ThemeActivityIndicatorViewStylePicker? {
+        get { return getThemePicker(base, "setActivityIndicatorViewStyle:") as? ThemeActivityIndicatorViewStylePicker }
+        set { setThemePicker(base, "setActivityIndicatorViewStyle:", newValue) }
     }
 }
-@objc public extension CATextLayer
-{
-    var theme_foregroundColor: ThemeCGColorPicker? {
-        get { return getThemePicker(self, "setForegroundColor:") as? ThemeCGColorPicker}
-        set { setThemePicker(self, "setForegroundColor:", newValue) }
+extension XTTheme where Base: UIScrollView {
+    public var indicatorStyle: ThemeScrollViewIndicatorStylePicker? {
+        get { return getThemePicker(base, "setIndicatorStyle:") as? ThemeScrollViewIndicatorStylePicker }
+        set { setThemePicker(base, "setIndicatorStyle:", newValue) }
     }
 }
-@objc public extension CAGradientLayer
-{
-    var theme_colors: ThemeAnyPicker? {
-        get { return getThemePicker(self, "setColors:") as? ThemeAnyPicker }
-        set { setThemePicker(self, "setColors:", newValue) }
+extension XTTheme where Base: UIButton {
+    public func setImage(_ picker: ThemeImagePicker?, forState state: UIControl.State) {
+        let statePicker = makeStatePicker(base, "setImage:forState:", picker, state)
+        setThemePicker(base, "setImage:forState:", statePicker)
+    }
+    public func setBackgroundImage(_ picker: ThemeImagePicker?, forState state: UIControl.State) {
+        let statePicker = makeStatePicker(base, "setBackgroundImage:forState:", picker, state)
+        setThemePicker(base, "setBackgroundImage:forState:", statePicker)
+    }
+    public func setTitleColor(_ picker: ThemeColorPicker?, forState state: UIControl.State) {
+        let statePicker = makeStatePicker(base, "setTitleColor:forState:", picker, state)
+        setThemePicker(base, "setTitleColor:forState:", statePicker)
+    }
+    public func setAttributedTitle(_ picker: ThemeAttributedStringPicker?, forState state: UIControl.State) {
+        let statePicker = makeStatePicker(base, "setAttributedTitle:forState:", picker, state)
+        setThemePicker(base, "setAttributedTitle:forState:", statePicker)
+    }
+}
+extension XTTheme where Base: CALayer {
+    public var backgroundColor: ThemeCGColorPicker? {
+        get { return getThemePicker(base, "setBackgroundColor:") as? ThemeCGColorPicker}
+        set { setThemePicker(base, "setBackgroundColor:", newValue) }
+    }
+    public var borderWidth: ThemeCGFloatPicker? {
+        get { return getThemePicker(base, "setBorderWidth:") as? ThemeCGFloatPicker }
+        set { setThemePicker(base, "setBorderWidth:", newValue) }
+    }
+    public var borderColor: ThemeCGColorPicker? {
+        get { return getThemePicker(base, "setBorderColor:") as? ThemeCGColorPicker }
+        set { setThemePicker(base, "setBorderColor:", newValue) }
+    }
+    public var shadowColor: ThemeCGColorPicker? {
+        get { return getThemePicker(base, "setShadowColor:") as? ThemeCGColorPicker }
+        set { setThemePicker(base, "setShadowColor:", newValue) }
+    }
+    public var strokeColor: ThemeCGColorPicker? {
+        get { return getThemePicker(base, "setStrokeColor:") as? ThemeCGColorPicker }
+        set { setThemePicker(base, "setStrokeColor:", newValue) }
+    }
+    public var fillColor: ThemeCGColorPicker?{
+        get { return getThemePicker(base, "setFillColor:") as? ThemeCGColorPicker }
+        set { setThemePicker(base, "setFillColor:", newValue) }
+    }
+}
+extension XTTheme where Base: CATextLayer {
+    public var foregroundColor: ThemeCGColorPicker? {
+        get { return getThemePicker(base, "setForegroundColor:") as? ThemeCGColorPicker}
+        set { setThemePicker(base, "setForegroundColor:", newValue) }
+    }
+}
+extension XTTheme where Base: CAGradientLayer {
+    public var colors: ThemeAnyPicker? {
+        get { return getThemePicker(base, "setColors:") as? ThemeAnyPicker }
+        set { setThemePicker(base, "setColors:", newValue) }
     }
 }
 
 #if os(iOS)
-@objc public extension UIToolbar
-{
-    var theme_barStyle: ThemeBarStylePicker? {
-        get { return getThemePicker(self, "setBarStyle:") as? ThemeBarStylePicker }
-        set { setThemePicker(self, "setBarStyle:", newValue) }
+extension XTTheme where Base: UIToolbar {
+    public var barStyle: ThemeBarStylePicker? {
+        get { return getThemePicker(base, "setBarStyle:") as? ThemeBarStylePicker }
+        set { setThemePicker(base, "setBarStyle:", newValue) }
     }
-    var theme_barTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBarTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBarTintColor:", newValue) }
-    }
-}
-@objc public extension UISegmentedControl
-{
-    var theme_selectedSegmentTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setSelectedSegmentTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setSelectedSegmentTintColor:", newValue) }
-    }
-    func theme_setTitleTextAttributes(_ picker: ThemeStringAttributesPicker?, forState state: UIControl.State) {
-        let statePicker = makeStatePicker(self, "setTitleTextAttributes:forState:", picker, state)
-        setThemePicker(self, "setTitleTextAttributes:forState:", statePicker)
+    public var barTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBarTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBarTintColor:", newValue) }
     }
 }
-@objc public extension UISwitch
-{
-    var theme_onTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setOnTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setOnTintColor:", newValue) }
+extension XTTheme where Base: UISegmentedControl {
+    public var selectedSegmentTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setSelectedSegmentTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setSelectedSegmentTintColor:", newValue) }
     }
-    var theme_thumbTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setThumbTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setThumbTintColor:", newValue) }
-    }
-}
-@objc public extension UISlider
-{
-    var theme_thumbTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setThumbTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setThumbTintColor:", newValue) }
-    }
-    var theme_minimumTrackTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setMinimumTrackTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setMinimumTrackTintColor:", newValue) }
-    }
-    var theme_maximumTrackTintColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setMaximumTrackTintColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setMaximumTrackTintColor:", newValue) }
+    public func setTitleTextAttributes(_ picker: ThemeStringAttributesPicker?, forState state: UIControl.State) {
+        let statePicker = makeStatePicker(base, "setTitleTextAttributes:forState:", picker, state)
+        setThemePicker(base, "setTitleTextAttributes:forState:", statePicker)
     }
 }
-@objc public extension UIPopoverPresentationController
-{
-    var theme_backgroundColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBackgroundColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBackgroundColor:", newValue) }
+extension XTTheme where Base: UISwitch {
+    public var onTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setOnTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setOnTintColor:", newValue) }
+    }
+    public var thumbTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setThumbTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setThumbTintColor:", newValue) }
     }
 }
-@objc public extension UIRefreshControl
-{
-    var theme_titleAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "updateTitleAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "updateTitleAttributes:", newValue) }
+extension XTTheme where Base: UISlider {
+    public var thumbTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setThumbTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setThumbTintColor:", newValue) }
+    }
+    public var minimumTrackTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setMinimumTrackTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setMinimumTrackTintColor:", newValue) }
+    }
+    public var maximumTrackTintColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setMaximumTrackTintColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setMaximumTrackTintColor:", newValue) }
     }
 }
-@objc public extension UIVisualEffectView
-{
-    var theme_effect: ThemeVisualEffectPicker? {
-        get { return getThemePicker(self, "setEffect:") as? ThemeVisualEffectPicker }
-        set { setThemePicker(self, "setEffect:", newValue) }
+extension XTTheme where Base: UIPopoverPresentationController {
+    public var backgroundColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBackgroundColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBackgroundColor:", newValue) }
+    }
+}
+extension XTTheme where Base: UIRefreshControl {
+    public var titleAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "updateTitleAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "updateTitleAttributes:", newValue) }
+    }
+}
+extension XTTheme where Base: UIVisualEffectView {
+    public var effect: ThemeVisualEffectPicker? {
+        get { return getThemePicker(base, "setEffect:") as? ThemeVisualEffectPicker }
+        set { setThemePicker(base, "setEffect:", newValue) }
     }
 }
 @available(iOS 13.0, *)
-public extension UINavigationBarAppearance
-{
-    var theme_titleTextAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "setTitleTextAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "setTitleTextAttributes:", newValue) }
+extension XTTheme where Base: UINavigationBarAppearance {
+    public var titleTextAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "setTitleTextAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "setTitleTextAttributes:", newValue) }
     }
-    var theme_largeTitleTextAttributes: ThemeStringAttributesPicker? {
-        get { return getThemePicker(self, "setLargeTitleTextAttributes:") as? ThemeStringAttributesPicker }
-        set { setThemePicker(self, "setLargeTitleTextAttributes:", newValue) }
+    public var largeTitleTextAttributes: ThemeStringAttributesPicker? {
+        get { return getThemePicker(base, "setLargeTitleTextAttributes:") as? ThemeStringAttributesPicker }
+        set { setThemePicker(base, "setLargeTitleTextAttributes:", newValue) }
     }
-    var theme_backIndicatorImage: ThemeImagePicker? {
-        get { return getThemePicker(self, "setBackIndicatorImage:") as? ThemeImagePicker }
-        set { setThemePicker(self, "setBackIndicatorImage:", newValue) }
+    public var backIndicatorImage: ThemeImagePicker? {
+        get { return getThemePicker(base, "setBackIndicatorImage:") as? ThemeImagePicker }
+        set { setThemePicker(base, "setBackIndicatorImage:", newValue) }
     }
 }
 @available(iOS 13.0, *)
-@objc public extension UIBarAppearance
-{
-    var theme_backgroundColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setBackgroundColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setBackgroundColor:", newValue) }
+extension XTTheme where Base: UIBarAppearance {
+    public var backgroundColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setBackgroundColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setBackgroundColor:", newValue) }
     }
-    var theme_backgroundImage: ThemeImagePicker? {
-        get { return getThemePicker(self, "setBackgroundImage:") as? ThemeImagePicker }
-        set { setThemePicker(self, "setBackgroundImage:", newValue) }
+    public var backgroundImage: ThemeImagePicker? {
+        get { return getThemePicker(base, "setBackgroundImage:") as? ThemeImagePicker }
+        set { setThemePicker(base, "setBackgroundImage:", newValue) }
     }
-    var theme_backgroundEffect: ThemeBlurEffectPicker? {
-        get { return getThemePicker(self, "setBackgroundEffect:") as? ThemeBlurEffectPicker }
-        set { setThemePicker(self, "setBackgroundEffect:", newValue) }
+    public var backgroundEffect: ThemeBlurEffectPicker? {
+        get { return getThemePicker(base, "setBackgroundEffect:") as? ThemeBlurEffectPicker }
+        set { setThemePicker(base, "setBackgroundEffect:", newValue) }
     }
-    var theme_shadowColor: ThemeColorPicker? {
-        get { return getThemePicker(self, "setShadowColor:") as? ThemeColorPicker }
-        set { setThemePicker(self, "setShadowColor:", newValue) }
+    public var shadowColor: ThemeColorPicker? {
+        get { return getThemePicker(base, "setShadowColor:") as? ThemeColorPicker }
+        set { setThemePicker(base, "setShadowColor:", newValue) }
     }
-    var theme_shadowImage: ThemeImagePicker? {
-        get { return getThemePicker(self, "setShadowImage:") as? ThemeImagePicker }
-        set { setThemePicker(self, "setShadowImage:", newValue) }
+    public var shadowImage: ThemeImagePicker? {
+        get { return getThemePicker(base, "setShadowImage:") as? ThemeImagePicker }
+        set { setThemePicker(base, "setShadowImage:", newValue) }
     }
 }
 #endif

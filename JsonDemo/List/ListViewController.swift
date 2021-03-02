@@ -13,8 +13,8 @@ class ListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.theme_backgroundColor = "Global.backgroundColor"
-        tableView.theme_separatorColor = "ListViewController.separatorColor"
+        tableView.theme.backgroundColor = "Global.backgroundColor"
+        tableView.theme.separatorColor = "ListViewController.separatorColor"
     }
     
 }

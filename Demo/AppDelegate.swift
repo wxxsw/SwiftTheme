@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // status bar
         
-        UIApplication.shared.theme_setStatusBarStyle([.lightContent, .default, .lightContent, .lightContent], animated: true)
+        UIApplication.shared.theme.setStatusBarStyle([.lightContent, .default, .lightContent, .lightContent], animated: true)
         
         // navigation bar
 
@@ -37,16 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
         }
         
-        navigationBar.theme_tintColor = GlobalPicker.barTextColor
-        navigationBar.theme_barTintColor = GlobalPicker.barTintColor
-        navigationBar.theme_titleTextAttributes = ThemeStringAttributesPicker.pickerWithAttributes(titleAttributes)
+        navigationBar.theme.tintColor = GlobalPicker.barTextColor
+        navigationBar.theme.barTintColor = GlobalPicker.barTintColor
+        navigationBar.theme.titleTextAttributes = ThemeStringAttributesPicker.pickerWithAttributes(titleAttributes)
         
         // tab bar
         
         let tabBar = UITabBar.appearance()
         
-        tabBar.theme_tintColor = GlobalPicker.barTextColor
-        tabBar.theme_barTintColor = GlobalPicker.barTintColor
+        tabBar.theme.tintColor = GlobalPicker.barTextColor
+        tabBar.theme.barTintColor = GlobalPicker.barTintColor
         
         return true
     }

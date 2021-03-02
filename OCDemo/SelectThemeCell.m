@@ -15,8 +15,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.title.theme_textColor = globalTextColorPicker;
-    self.themeIcon.theme_image = [ThemeImagePicker pickerWithNames:@[@"icon_theme_red", @"icon_theme_yellow", @"icon_theme_blue", @"icon_theme_light"]];
+    self.title.theme.textColor = globalTextColorPicker;
+    self.themeIcon.theme.image = [ThemeImagePicker pickerWithNames:@[@"icon_theme.red", @"icon_theme.yellow", @"icon_theme.blue", @"icon_theme.light"]];
 }
 
 @end

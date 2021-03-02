@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.theme_backgroundColor = globalBackgroundColorPicker;
-    self.tableView.theme_separatorColor = [ThemeColorPicker pickerWithColors:@[@"#C6C5C5", @"#C6C5C5", @"#C6C5C5", @"#ECF0F1"]];
+    self.tableView.theme.backgroundColor = globalBackgroundColorPicker;
+    self.tableView.theme.separatorColor = [ThemeColorPicker pickerWithColors:@[@"#C6C5C5", @"#C6C5C5", @"#C6C5C5", @"#ECF0F1"]];
 }
 
 @end
