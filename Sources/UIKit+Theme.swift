@@ -22,6 +22,10 @@ import UIKit
         get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTintColor:", newValue) }
     }
+    var theme_borderColor: ThemeColorPicker? {
+        get { return getThemePicker(self, "setBorderColor:") as? ThemeColorPicker }
+        set { setThemePicker(self, "setBorderColor:", newValue) }
+    }
 }
 @objc public extension UIApplication
 {
