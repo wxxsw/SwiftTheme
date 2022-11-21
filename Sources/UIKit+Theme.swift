@@ -22,6 +22,10 @@ import UIKit
         get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTintColor:", newValue) }
     }
+    var theme_backgroundColorOrGradient: ThemeAnyPicker? {
+        get { return getThemePicker(self, "backgroundColorOrGradient:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "backgroundColorOrGradient:", newValue) }
+    }
 }
 @objc public extension UIApplication
 {
