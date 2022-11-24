@@ -26,6 +26,14 @@ import UIKit
         get { return getThemePicker(self, "setBackgroundColorOrGradient:") as? ThemeAnyPicker }
         set { setThemePicker(self, "setBackgroundColorOrGradient:", newValue) }
     }
+    var theme_widthConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setWidthConstantConstraint:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setWidthConstantConstraint:", newValue) }
+    }
+    var theme_heightConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setHeightConstantConstraint:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setHeightConstantConstraint:", newValue) }
+    }
 }
 @objc public extension UIApplication
 {
