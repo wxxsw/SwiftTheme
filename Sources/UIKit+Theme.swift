@@ -323,6 +323,10 @@ import UIKit
         get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
         set { setThemePicker(self, "setFillColor:", newValue) }
     }
+    var theme_figmaShadow: ThemeAnyPicker? {
+        get { return getThemePicker(self, "setFigmaShadowTokens:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "setFigmaShadowTokens:", newValue) }
+    }
 }
 @objc public extension CATextLayer
 {
