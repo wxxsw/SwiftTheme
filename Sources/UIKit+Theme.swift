@@ -409,6 +409,13 @@ import UIKit
         set { setThemePicker(self, "setEffect:", newValue) }
     }
 }
+@objc public extension NSLayoutConstraint
+{
+    var theme_constraintConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setConstraintConstant:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setConstraintConstant:", newValue) }
+    }
+}
 @available(iOS 13.0, *)
 @objc public extension UINavigationBarAppearance
 {
