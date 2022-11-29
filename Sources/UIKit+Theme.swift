@@ -323,6 +323,10 @@ import UIKit
         get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
         set { setThemePicker(self, "setFillColor:", newValue) }
     }
+    var theme_figmaShadow: ThemeAnyPicker? {
+        get { return getThemePicker(self, "setFigmaShadowTokens:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "setFigmaShadowTokens:", newValue) }
+    }
 }
 @objc public extension CATextLayer
 {
@@ -407,6 +411,13 @@ import UIKit
     var theme_effect: ThemeVisualEffectPicker? {
         get { return getThemePicker(self, "setEffect:") as? ThemeVisualEffectPicker }
         set { setThemePicker(self, "setEffect:", newValue) }
+    }
+}
+@objc public extension NSLayoutConstraint
+{
+    var theme_constraintConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setConstraintConstant:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setConstraintConstant:", newValue) }
     }
 }
 @available(iOS 13.0, *)
