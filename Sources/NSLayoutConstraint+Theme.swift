@@ -1,11 +1,10 @@
 //
-//  File.swift
-//  
+//  NSLayoutConstraint+Theme.swift
+//
+//  Setters used by ThemePickers operating on NSLayoutConstraint.
 //
 //  Created by Ryan Tan on 29/11/22.
 //
-
-import Foundation
 
 import UIKit
 
