@@ -420,6 +420,13 @@ import UIKit
         set { setThemePicker(self, "setConstraintConstant:", newValue) }
     }
 }
+@objc public extension UIStackView
+{
+    var theme_stackViewSpacing: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewSpacing:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewSpacing:", newValue) }
+    }
+}
 @available(iOS 13.0, *)
 @objc public extension UINavigationBarAppearance
 {
