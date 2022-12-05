@@ -10,6 +10,7 @@ import UIKit
 //ref: https://stackoverflow.com/questions/34269399/how-to-control-shadow-spread-and-blur
 extension CALayer {
     func setFigmaShadowTokens(value: Any?) {
+        print("RAS/SwiftTheme setFigmaShadowTokens value \(value)")
         guard let figmaValues = value as? [String: Any] else {
             fatalError("Could not cast figmaTokenValuesRaw to Dictionary")
         }
