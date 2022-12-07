@@ -60,8 +60,8 @@ extension UIStackView {
     /// - Parameter value: a `ThemeCGFloatPicker` value
     @objc func setStackViewPaddingVertical(_ value: CGFloat) {
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins.left = value
-        layoutMargins.right = value
+        layoutMargins.top = value
+        layoutMargins.bottom = value
     }
 
     /// Sets padding for horizontal (leading, trailing) on stack views.
@@ -70,8 +70,8 @@ extension UIStackView {
     /// - Parameter value: a `ThemeCGFloatPicker` value
     @objc func setStackViewPaddingHorizontal(_ value: CGFloat) {
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins.top = value
-        layoutMargins.bottom = value
+        layoutMargins.left = value
+        layoutMargins.right = value
     }
 
     /// Sets padding all sides on stack views.
