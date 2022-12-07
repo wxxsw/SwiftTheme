@@ -426,6 +426,34 @@ import UIKit
         get { return getThemePicker(self, "setStackViewSpacing:") as? ThemeCGFloatPicker }
         set { setThemePicker(self, "setStackViewSpacing:", newValue) }
     }
+    var theme_paddingLeft: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingLeft:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingLeft:", newValue) }
+    }
+    var theme_paddingTop: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingTop:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingTop:", newValue) }
+    }
+    var theme_paddingRight: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingRight:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingRight:", newValue) }
+    }
+    var theme_paddingBottom: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingBottom:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingBottom:", newValue) }
+    }
+    var theme_paddingVertical: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingVertical:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingVertical:", newValue) }
+    }
+    var theme_paddingHorizontal: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingHorizontal:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingHorizontal:", newValue) }
+    }
+    var theme_padding: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPadding:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPadding:", newValue) }
+    }
 }
 @available(iOS 13.0, *)
 @objc public extension UINavigationBarAppearance
