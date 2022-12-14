@@ -164,6 +164,16 @@ import UIKit
         get { return getThemePicker(self, "setSelectedImage:") as? ThemeImagePicker }
         set { setThemePicker(self, "setSelectedImage:", newValue) }
     }
+
+    var theme_titlePositionAdjustmentVertical: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setTitlePositionAdjustmentVertical:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setTitlePositionAdjustmentVertical:", newValue) }
+    }
+
+    var theme_titlePositionAdjustmentVerticalNegative: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setTitlePositionAdjustmentVerticalNegative:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setTitlePositionAdjustmentVerticalNegative:", newValue) }
+    }
 }
 @objc public extension UITableView
 {
@@ -326,6 +336,10 @@ import UIKit
     var theme_figmaShadow: ThemeAnyPicker? {
         get { return getThemePicker(self, "setFigmaShadowTokens:") as? ThemeAnyPicker }
         set { setThemePicker(self, "setFigmaShadowTokens:", newValue) }
+    }
+    var theme_cornerRadius: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "customSetCornerRadius:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "customSetCornerRadius:", newValue) }
     }
 }
 @objc public extension CATextLayer
