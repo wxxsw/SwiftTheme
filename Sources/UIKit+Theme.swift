@@ -434,6 +434,17 @@ import UIKit
         set { setThemePicker(self, "setConstraintConstant:", newValue) }
     }
 }
+
+@available(iOS 13.0, *)
+@objc public extension NSCollectionLayoutSection
+{
+    var theme_sectionInterGroupSpacing: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setSectionInterGroupSpacing:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setSectionInterGroupSpacing:", newValue) }
+    }
+}
+
+
 @objc public extension UIStackView
 {
     var theme_stackViewSpacing: ThemeCGFloatPicker? {
