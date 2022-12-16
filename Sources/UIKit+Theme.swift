@@ -22,6 +22,18 @@ import UIKit
         get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTintColor:", newValue) }
     }
+    var theme_backgroundColorOrGradient: ThemeAnyPicker? {
+        get { return getThemePicker(self, "setBackgroundColorOrGradient:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "setBackgroundColorOrGradient:", newValue) }
+    }
+    var theme_widthConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setWidthConstantConstraint:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setWidthConstantConstraint:", newValue) }
+    }
+    var theme_heightConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setHeightConstantConstraint:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setHeightConstantConstraint:", newValue) }
+    }
 }
 @objc public extension UIApplication
 {
@@ -151,6 +163,16 @@ import UIKit
     var theme_selectedImage: ThemeImagePicker? {
         get { return getThemePicker(self, "setSelectedImage:") as? ThemeImagePicker }
         set { setThemePicker(self, "setSelectedImage:", newValue) }
+    }
+
+    var theme_titlePositionAdjustmentVertical: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setTitlePositionAdjustmentVertical:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setTitlePositionAdjustmentVertical:", newValue) }
+    }
+
+    var theme_titlePositionAdjustmentVerticalNegative: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setTitlePositionAdjustmentVerticalNegative:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setTitlePositionAdjustmentVerticalNegative:", newValue) }
     }
 }
 @objc public extension UITableView
@@ -311,6 +333,14 @@ import UIKit
         get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
         set { setThemePicker(self, "setFillColor:", newValue) }
     }
+    var theme_figmaShadow: ThemeAnyPicker? {
+        get { return getThemePicker(self, "setFigmaShadowTokens:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "setFigmaShadowTokens:", newValue) }
+    }
+    var theme_cornerRadius: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "customSetCornerRadius:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "customSetCornerRadius:", newValue) }
+    }
 }
 @objc public extension CATextLayer
 {
@@ -395,6 +425,59 @@ import UIKit
     var theme_effect: ThemeVisualEffectPicker? {
         get { return getThemePicker(self, "setEffect:") as? ThemeVisualEffectPicker }
         set { setThemePicker(self, "setEffect:", newValue) }
+    }
+}
+@objc public extension NSLayoutConstraint
+{
+    var theme_constraintConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setConstraintConstant:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setConstraintConstant:", newValue) }
+    }
+}
+
+@available(iOS 13.0, *)
+@objc public extension NSCollectionLayoutSection
+{
+    var theme_sectionInterGroupSpacing: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setSectionInterGroupSpacing:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setSectionInterGroupSpacing:", newValue) }
+    }
+}
+
+
+@objc public extension UIStackView
+{
+    var theme_stackViewSpacing: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewSpacing:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewSpacing:", newValue) }
+    }
+    var theme_paddingLeft: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingLeft:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingLeft:", newValue) }
+    }
+    var theme_paddingTop: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingTop:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingTop:", newValue) }
+    }
+    var theme_paddingRight: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingRight:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingRight:", newValue) }
+    }
+    var theme_paddingBottom: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingBottom:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingBottom:", newValue) }
+    }
+    var theme_paddingVertical: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingVertical:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingVertical:", newValue) }
+    }
+    var theme_paddingHorizontal: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPaddingHorizontal:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPaddingHorizontal:", newValue) }
+    }
+    var theme_padding: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewPadding:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewPadding:", newValue) }
     }
 }
 @available(iOS 13.0, *)
