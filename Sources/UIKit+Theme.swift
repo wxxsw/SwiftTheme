@@ -22,6 +22,18 @@ import UIKit
         get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTintColor:", newValue) }
     }
+    var theme_backgroundColorOrGradient: ThemeAnyPicker? {
+        get { return getThemePicker(self, "setBackgroundColorOrGradient:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "setBackgroundColorOrGradient:", newValue) }
+    }
+    var theme_widthConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setWidthConstantConstraint:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setWidthConstantConstraint:", newValue) }
+    }
+    var theme_heightConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setHeightConstantConstraint:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setHeightConstantConstraint:", newValue) }
+    }
 }
 @objc public extension UIApplication
 {
@@ -311,6 +323,10 @@ import UIKit
         get { return getThemePicker(self, "setFillColor:") as? ThemeCGColorPicker }
         set { setThemePicker(self, "setFillColor:", newValue) }
     }
+    var theme_figmaShadow: ThemeAnyPicker? {
+        get { return getThemePicker(self, "setFigmaShadowTokens:") as? ThemeAnyPicker }
+        set { setThemePicker(self, "setFigmaShadowTokens:", newValue) }
+    }
 }
 @objc public extension CATextLayer
 {
@@ -395,6 +411,20 @@ import UIKit
     var theme_effect: ThemeVisualEffectPicker? {
         get { return getThemePicker(self, "setEffect:") as? ThemeVisualEffectPicker }
         set { setThemePicker(self, "setEffect:", newValue) }
+    }
+}
+@objc public extension NSLayoutConstraint
+{
+    var theme_constraintConstant: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setConstraintConstant:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setConstraintConstant:", newValue) }
+    }
+}
+@objc public extension UIStackView
+{
+    var theme_stackViewSpacing: ThemeCGFloatPicker? {
+        get { return getThemePicker(self, "setStackViewSpacing:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self, "setStackViewSpacing:", newValue) }
     }
 }
 @available(iOS 13.0, *)
