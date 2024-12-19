@@ -1,11 +1,15 @@
-// swift-tools-version:5.1
+// swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "SwiftTheme",
-    platforms: [.iOS(.v9)],
+    defaultLocalization: "en",
+    platforms: [
+        .macOS(.v11),
+        .iOS(.v15)
+    ],
     products: [
         .library(
             name: "SwiftTheme",
@@ -14,7 +18,7 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftTheme",
-            path: "Sources"),
-    ]
+            path: "SwiftTheme")
+    ],
+    swiftLanguageVersions: [.v5]
 )
-
