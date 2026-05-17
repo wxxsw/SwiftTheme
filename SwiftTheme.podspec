@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Sources'
+  s.resources = ['Sources/PrivacyInfo.xcprivacy']
   
   s.swift_version = "4.2"
   s.swift_versions = ['4.2', '5.0', '5.1']
