@@ -112,6 +112,11 @@ import UIKit
         get { return getThemePicker(self, "setScrollEdgeAppearance:") as? ThemeNavigationBarAppearancePicker }
         set { setThemePicker(self, "setScrollEdgeAppearance:", newValue) }
     }
+    @available(iOS 15.0, tvOS 15.0, *)
+    var theme_compactScrollEdgeAppearance: ThemeNavigationBarAppearancePicker? {
+        get { return getThemePicker(self, "setCompactScrollEdgeAppearance:") as? ThemeNavigationBarAppearancePicker }
+        set { setThemePicker(self, "setCompactScrollEdgeAppearance:", newValue) }
+    }
 }
 @objc public extension UITabBar
 {
@@ -136,11 +141,12 @@ import UIKit
         set { setThemePicker(self, "setStandardAppearance:", newValue) }
     }
     @available(iOS 13.0, tvOS 13.0, *)
+    @available(*, deprecated, message: "UITabBar has no compactAppearance. Use theme_standardAppearance and, on iOS 15+, theme_scrollEdgeAppearance.")
     var theme_compactAppearance: ThemeTabBarAppearancePicker? {
         get { return getThemePicker(self, "setCompactAppearance:") as? ThemeTabBarAppearancePicker }
         set { setThemePicker(self, "setCompactAppearance:", newValue) }
     }
-    @available(iOS 13.0, tvOS 13.0, *)
+    @available(iOS 15.0, tvOS 15.0, *)
     var theme_scrollEdgeAppearance: ThemeTabBarAppearancePicker? {
         get { return getThemePicker(self, "setScrollEdgeAppearance:") as? ThemeTabBarAppearancePicker }
         set { setThemePicker(self, "setScrollEdgeAppearance:", newValue) }

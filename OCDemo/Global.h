@@ -13,4 +13,5 @@
 
 #define globalBarTextColors @[@"#FFF", @"#000", @"#FFF", @"#FFF"]
 #define globalBarTextColorPicker [ThemeColorPicker pickerWithColors:globalBarTextColors]
-#define globalBarTintColorPicker [ThemeColorPicker pickerWithColors: @[@"#EB4F38", @"#F4C600", @"#56ABE4", @"#01040D"]]
+#define globalBarTintColors @[@"#EB4F38", @"#F4C600", @"#56ABE4", @"#01040D"]
+#define globalBarTintColorPicker [ThemeColorPicker pickerWithColors:globalBarTintColors]

@@ -15,7 +15,8 @@ import UIKit
     }
     
     public convenience init(_ attributedStrings: [NSAttributedString]...) {
-        self.init(v: { ThemeManager.element(for: attributedStrings) })
+        let strings = attributedStrings.flatMap { $0 }
+        self.init(v: { ThemeManager.element(for: strings) })
     }
     
     public required convenience init(arrayLiteral elements: NSAttributedString...) {

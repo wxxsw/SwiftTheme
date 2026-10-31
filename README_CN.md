@@ -18,6 +18,8 @@
 <a href="https://github.com/wxxsw/SwiftTheme/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat"></a>
 </p>
 
+常见配置示例与兼容性限制：[主题配置说明（英文）](docs/UsageNotes.md)。
+
 ## 截屏
 
 ![](https://github.com/wxxsw/SwiftThemeResources/blob/master/Screenshots/switch.gif)
